@@ -1,0 +1,21 @@
+{
+    "name": "piripasa/article-manager",
+    "description": "A Reusable Article Manager for Laravel Projects",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Zaman-A-Piri Pasa",
+            "email": "pollobcse05@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "cviebrock/eloquent-sluggable": "^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Piripasa\\ArticleManager\\": "src"
+        }
+    }
+}
