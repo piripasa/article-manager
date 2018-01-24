@@ -30,10 +30,12 @@ class ArticleManagerServiceProvider extends ServiceProvider
     {
         $this->app->register(\Cviebrock\EloquentSluggable\ServiceProvider::class);
         $this->app->register(\Collective\Html\HtmlServiceProvider::class);
+        $this->app->register(\Intervention\Image\ImageServiceProvider::class);
 
         $loader = \Illuminate\Foundation\AliasLoader::getInstance();
         $loader->alias('Form', \Collective\Html\FormFacade::class);
         $loader->alias('Html', \Collective\Html\HtmlFacade::class);
+        $loader->alias('Image', \Intervention\Image\Facades\Image::class);
 
         // Controllers
         $this->app->make('Piripasa\ArticleManager\Controllers\CategoryController');

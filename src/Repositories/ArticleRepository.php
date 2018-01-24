@@ -9,43 +9,38 @@
 namespace Piripasa\ArticleManager\Repositories;
 
 use Illuminate\Http\Request;
-use Piripasa\ArticleManager\Models\Tag;
+use Piripasa\ArticleManager\Models\Article;
 
-class TagRepository
+class ArticleRepository
 {
     protected $model;
 
-    public function __construct(Tag $tag)
+    public function __construct(Article $article)
     {
-        $this->model = $tag;
+        $this->model = $article;
     }
 
-    public function getTags()
+    public function getArticles()
     {
         return $this->model->paginate(10);
     }
 
-    public function getTag($id)
+    public function getArticle($id)
     {
         return $this->model->findOrFail($id);
     }
 
-    public function getTagsForSelect()
-    {
-        return $this->model->pluck('name', 'id')->toArray();
-    }
-
-    public function createTag(Request $request)
+    public function createArticle(Request $request)
     {
         return $this->model->firstOrCreate($request->except(['_token', '_method']));
     }
 
-    public function updateTag(Request $request, $id)
+    public function updateArticle(Request $request, $id)
     {
         return $this->model->whereId($id)->update($request->except(['_token', '_method']));
     }
 
-    public function deleteTag($id)
+    public function deleteArticle($id)
     {
         return $this->model->destroy($id);
     }

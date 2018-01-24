@@ -5,8 +5,7 @@ namespace Piripasa\ArticleManager\Models;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
-use Piripasa\ArticleManager\Models\Category;
-use Piripasa\ArticleManager\Models\Tag;
+use Intervention\Image\Image;
 
 class Article extends Model
 {
@@ -67,5 +66,26 @@ class Article extends Model
         }
 
         return $this->title;
+    }
+
+    public function setImageAttribute($value) {
+        $image = $value;
+        $input['image'] = time().'.'.$image->getClientOriginalExtension();
+        $img = Image::make($image->getRealPath());
+
+        $destinationPath = public_path('/uploads/articles');
+        $img->resize(750, 450, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save($destinationPath.'/'.$input['image']);
+
+        $destinationPath = public_path('/uploads/articles/thumb');
+
+        $img->resize(100, 100, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save($destinationPath.'/'.$input['image']);
+
+        // $image->move($destinationPath, $input['image']); // for no resize
+
+        $this->attributes['image'] =   strtolower($input['image']);
     }
 }
