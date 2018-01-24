@@ -5,7 +5,6 @@ namespace Piripasa\ArticleManager\Models;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
-use Piripasa\ArticleManager\Models\Article;
 
 class Tag extends Model
 {
@@ -19,7 +18,7 @@ class Tag extends Model
     protected $table = 'tags';
 
     protected $fillable = [
-    	'name'
+    	'name', 'slug'
     ];
 
     /**
