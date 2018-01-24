@@ -2,9 +2,9 @@
 
 namespace Piripasa\ArticleManager\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Piripasa\ArticleManager\Repositories\CategoryRepository;
+use Piripasa\ArticleManager\Requests\CategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -43,10 +43,10 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CategoryRequest $request
+     * @return $this|\Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
         try {
             $this->respository->createCategory($request);
@@ -84,11 +84,11 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param CategoryRequest $request
+     * @param $id
+     * @return $this|\Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
         try {
             $this->respository->updateCategory($request, $id);
