@@ -29,7 +29,12 @@ class ArticleManagerServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(\Cviebrock\EloquentSluggable\ServiceProvider::class);
-        
+        $this->app->register(\Collective\Html\HtmlServiceProvider::class);
+
+        $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+        $loader->alias('Form', \Collective\Html\FormFacade::class);
+        $loader->alias('Html', \Collective\Html\HtmlFacade::class);
+
         // Controllers
         $this->app->make('Piripasa\ArticleManager\Controllers\CategoryController');
         $this->app->make('Piripasa\ArticleManager\Controllers\TagController');

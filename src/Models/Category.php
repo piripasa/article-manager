@@ -5,8 +5,6 @@ namespace Piripasa\ArticleManager\Models;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
-use Piripasa\ArticleManager\Models\Category;
-use Piripasa\ArticleManager\Models\Article;
 
 class Category extends Model
 {

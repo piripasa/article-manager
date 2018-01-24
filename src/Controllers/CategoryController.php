@@ -4,9 +4,18 @@ namespace Piripasa\ArticleManager\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Piripasa\ArticleManager\Repositories\CategoryRepository;
 
 class CategoryController extends Controller
 {
+    protected $respository;
+    protected $data;
+
+    public function __construct(CategoryRepository $categoryRepository)
+    {
+        $this->respository = $categoryRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +23,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $this->data['all'] = $this->respository->getCategories();
+
+        return view('artiman::category.index', $this->data);
     }
 
     /**
@@ -24,7 +35,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $this->data['categories'] = $this->respository->getCategoriesForSelect();
+
+        return view('artiman::category.create', $this->data);
     }
 
     /**
@@ -35,7 +48,12 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $this->respository->createCategory($request);
+            return redirect('category')->with('message', 'Category Created');
+        } catch (\Exception $e) {
+            return back()->withErrors($e->getMessage());
+        }
     }
 
     /**
@@ -46,7 +64,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        return $this->respository->getCategory($id);
     }
 
     /**
@@ -57,7 +75,10 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $this->data['category'] = $this->respository->getCategory($id);
+        $this->data['categories'] = $this->respository->getCategoriesForSelect();
+
+        return view('artiman::category.edit', $this->data);
     }
 
     /**
@@ -69,7 +90,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $this->respository->updateCategory($request, $id);
+            return redirect('category')->with('message', 'Category Updated');
+        } catch (\Exception $e) {
+            return back()->withErrors($e->getMessage());
+        }
     }
 
     /**
@@ -80,6 +106,11 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $this->respository->deleteCategory($id);
+            return redirect('category')->with('message', 'Category Deleted');
+        } catch (\Exception $e) {
+            return back()->withErrors($e->getMessage());
+        }
     }
 }
