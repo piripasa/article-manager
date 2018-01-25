@@ -48,6 +48,6 @@ class ArticleManagerServiceProvider extends ServiceProvider
         $this->app->make('Piripasa\ArticleManager\Models\Article');
 
         // Views
-        $this->loadViewsFrom(__DIR__.'/views/article-manager', 'artiman');
+        $this->loadViewsFrom(__DIR__.'/views/article-manager', 'article-manager');
     }
 }

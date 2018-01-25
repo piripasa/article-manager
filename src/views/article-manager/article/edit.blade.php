@@ -1,5 +1,5 @@
 
-@extends('artiman::layout')
+@extends('article-manager::layout')
 
 @section('content')
     <div class="container">

@@ -25,7 +25,7 @@ class CategoryController extends Controller
     {
         $this->data['all'] = $this->respository->getCategories();
 
-        return view('artiman::category.index', $this->data);
+        return view('article-manager::category.index', $this->data);
     }
 
     /**
@@ -37,7 +37,7 @@ class CategoryController extends Controller
     {
         $this->data['categories'] = $this->respository->getCategoriesForSelect();
 
-        return view('artiman::category.create', $this->data);
+        return view('article-manager::category.create', $this->data);
     }
 
     /**
@@ -78,7 +78,7 @@ class CategoryController extends Controller
         $this->data['category'] = $this->respository->getCategory($id);
         $this->data['categories'] = $this->respository->getCategoriesForSelect();
 
-        return view('artiman::category.edit', $this->data);
+        return view('article-manager::category.edit', $this->data);
     }
 
     /**

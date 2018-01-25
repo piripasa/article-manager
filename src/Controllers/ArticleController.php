@@ -34,7 +34,7 @@ class ArticleController extends Controller
     {
         $this->data['all'] = $this->respository->getArticles();
 
-        return view('artiman::article.index', $this->data);
+        return view('article-manager::article.index', $this->data);
     }
 
     /**
@@ -47,7 +47,7 @@ class ArticleController extends Controller
         $this->data['categories'] = $this->categoryRespository->getCategoriesForSelect();
         $this->data['tags'] = $this->tagRespository->getTagsForSelect();
 
-        return view('artiman::article.create', $this->data);
+        return view('article-manager::article.create', $this->data);
     }
 
     /**
@@ -89,7 +89,7 @@ class ArticleController extends Controller
         $this->data['categories'] = $this->categoryRespository->getCategoriesForSelect();
         $this->data['tags'] = $this->tagRespository->getTagsForSelect();
 
-        return view('artiman::article.edit', $this->data);
+        return view('article-manager::article.edit', $this->data);
     }
 
     /**

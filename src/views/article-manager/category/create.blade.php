@@ -1,4 +1,4 @@
-@extends('artiman::layout')
+@extends('article-manager::layout')
 
 @section('content')
 <div class="container">
@@ -12,7 +12,7 @@
                         <h3>Add a new  category</h3>
                     </div>
                     <div class="panel-body row">
-                        @include('artiman::errors')
+                        @include('article-manager::errors')
                         <div class="form-group col-md-12">
                             <label>Name</label>
                             <input type="text" name="name" value="{{ old('name') }}" class="form-control">

@@ -28,7 +28,7 @@ class TagController extends Controller
     {
         $this->data['all'] = $this->respository->getTags();
 
-        return view('artiman::tag.index', $this->data);
+        return view('article-manager::tag.index', $this->data);
     }
 
     /**
@@ -38,7 +38,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        return view('artiman::tag.create', $this->data);
+        return view('article-manager::tag.create', $this->data);
     }
 
     /**
@@ -78,7 +78,7 @@ class TagController extends Controller
     {
         $this->data['tag'] = $this->respository->getTag($id);
 
-        return view('artiman::tag.edit', $this->data);
+        return view('article-manager::tag.edit', $this->data);
     }
 
     /**
