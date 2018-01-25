@@ -7,7 +7,7 @@ This package provides you with a simple tool to set up a new package and it will
 Via Composer
 
 ```bash
-$ composer require piripasa/article-manager
+$ composer require piripasa/article-manager dev-master
 ```
 
 If you do not run Laravel 5.5 (or higher), then add the service provider in `config/app.php`:
