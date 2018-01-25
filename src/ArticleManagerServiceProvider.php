@@ -38,14 +38,14 @@ class ArticleManagerServiceProvider extends ServiceProvider
         $loader->alias('Image', \Intervention\Image\Facades\Image::class);
 
         // Controllers
-        $this->app->make('Piripasa\ArticleManager\Controllers\CategoryController');
-        $this->app->make('Piripasa\ArticleManager\Controllers\TagController');
-        $this->app->make('Piripasa\ArticleManager\Controllers\ArticleController');
+        $this->app->make(\Piripasa\ArticleManager\Controllers\CategoryController::class);
+        $this->app->make(\Piripasa\ArticleManager\Controllers\TagController::class);
+        $this->app->make(\Piripasa\ArticleManager\Controllers\ArticleController::class);
         
         // Models
-        $this->app->make('Piripasa\ArticleManager\Models\Category');
-        $this->app->make('Piripasa\ArticleManager\Models\Tag');
-        $this->app->make('Piripasa\ArticleManager\Models\Article');
+        $this->app->make(\Piripasa\ArticleManager\Models\Category::class);
+        $this->app->make(\Piripasa\ArticleManager\Models\Tag::class);
+        $this->app->make(\Piripasa\ArticleManager\Models\Article::class);
 
         // Views
         $this->loadViewsFrom(__DIR__.'/views/article-manager', 'article-manager');
