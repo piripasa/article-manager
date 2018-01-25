@@ -1,5 +1,5 @@
 
-@extends('layouts.app')
+@extends('artiman::layout')
 
 @section('content')
     <div class="container">
@@ -37,11 +37,16 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label>Date</label>
-                            <input type="date" name="date" value="{{ old('date') }}" class="form-control">
+                            <div class="input-group date" data-provide="datepicker">
+                                <input type="text" name="date" value="{{ old('date') }}" class="form-control">
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-th"></span>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group col-md-12">
                             <label>Content</label>
-                            <textarea name="content" class="form-control">{{ old('content') }}</textarea>
+                            <textarea name="content" rows="5" class="form-control">{{ old('content') }}</textarea>
                         </div>
                         <div class="form-group col-md-12">
                             <label>Image</label>
@@ -49,11 +54,11 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label>Category</label>
-                            {!! Form::select('category_id', $categories, null, ['class' => 'form-control', 'placeholder' => 'Pick a Category']) !!}
+                            {!! Form::select('category_id', $categories, null, ['class' => 'form-control', 'placeholder' => 'Pick a Category', 'id' => 'category']) !!}
                         </div>
                         <div class="form-group col-md-6">
                             <label>Tags</label>
-                            {!! Form::select('tags[]', $tags, null, ['class' => 'form-control', 'placeholder' => 'Pick a Tag', 'multiple' => true]) !!}
+                            {!! Form::select('tags[]', $tags, null, ['class' => 'form-control', 'multiple' => true, 'id' => 'tags']) !!}
                         </div>
                         <div class="form-group col-md-12">
                             <label>Status</label>
@@ -82,4 +87,15 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('after_scripts')
+
+    <script>
+        $(document).ready(function() {
+            $('.datepicker').datepicker();
+            $('#category, #tags').select2();
+        });
+    </script>
+
 @endsection
