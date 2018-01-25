@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('artiman::layout')
 
 @section('content')
     <div class="container">
