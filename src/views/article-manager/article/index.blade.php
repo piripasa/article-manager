@@ -22,10 +22,10 @@
                             <tbody>
                             @foreach($all as $item)
                                 <tr>
-                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->title }}</td>
                                     <td>{{ $item->status }}</td>
                                     <td>{{ $item->date }}</td>
-                                    <td>{{ $item->featured }}</td>
+                                    <td>{{ $item->featured ? 'Yes' : 'No' }}</td>
                                     <td>
                                         <a href="{{ route('article.edit', $item->id) }}" class="btn btn-primary">Edit</a>
                                     </td>

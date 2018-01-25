@@ -32,7 +32,10 @@ class ArticleRepository
 
     public function createArticle(Request $request)
     {
-        return $this->model->firstOrCreate($request->except(['_token', '_method']));
+        $article = $this->model->firstOrCreate($request->except(['_token', '_method', 'tags']));
+        $article->tags()->sync($request->tags);
+
+        return $article;
     }
 
     public function updateArticle(Request $request, $id)

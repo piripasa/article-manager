@@ -5,7 +5,8 @@ namespace Piripasa\ArticleManager\Models;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
-use Intervention\Image\Image;
+use Illuminate\Support\Facades\File;
+use Image;
 
 class Article extends Model
 {
@@ -68,24 +69,34 @@ class Article extends Model
         return $this->title;
     }
 
-    public function setImageAttribute($value) {
+    public function setImageAttribute($value)
+    {
         $image = $value;
         $input['image'] = time().'.'.$image->getClientOriginalExtension();
         $img = Image::make($image->getRealPath());
 
-        $destinationPath = public_path('/uploads/articles');
+        $destinationPath = public_path('uploads/articles');
+        $thumbPath = public_path('uploads/articles/thumb');
+
+        if (!File::exists($thumbPath)) {
+            File::makeDirectory($thumbPath, 0777, true, true);
+        }
+
+        if (!File::exists($destinationPath)) {
+            File::makeDirectory($destinationPath, 0777, true, true);
+        }
+
         $img->resize(750, 450, function ($constraint) {
             $constraint->aspectRatio();
         })->save($destinationPath.'/'.$input['image']);
 
-        $destinationPath = public_path('/uploads/articles/thumb');
-
         $img->resize(100, 100, function ($constraint) {
             $constraint->aspectRatio();
-        })->save($destinationPath.'/'.$input['image']);
+        })->save($thumbPath.'/'.$input['image']);
 
         // $image->move($destinationPath, $input['image']); // for no resize
 
         $this->attributes['image'] =   strtolower($input['image']);
     }
+
 }

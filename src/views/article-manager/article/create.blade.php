@@ -18,7 +18,7 @@
                         </ul>
                     </div>
                 @endif
-                {!! Form::open(['route' => ['article.store']]) !!}
+                {!! Form::open(['route' => ['article.store'], 'files' => true]) !!}
                 {{ csrf_field() }}
                 {{ method_field('POST') }}
                 <div class="panel">
@@ -28,32 +28,37 @@
                     <div class="panel-body row">
                         <div class="form-group col-md-12">
                             <label>Name</label>
-                            <input type="text" name="name" value="{{ old('name') }}" class="form-control">
+                            <input type="text" name="title" value="{{ old('title') }}" class="form-control">
                         </div>
                         <div class="form-group col-md-12">
                             <label>Slug (URL)</label>
                             <input type="text" name="slug" value="{{ old('slug') }}" class="form-control">
                             <p class="help-block">Will be automatically generated from your name, if left empty.</p>
                         </div>
-                        <div class="form-group col-md-12">
+                        <div class="form-group col-md-4">
                             <label>Date</label>
                             <input type="date" name="date" value="{{ old('date') }}" class="form-control">
                         </div>
                         <div class="form-group col-md-12">
                             <label>Content</label>
-                            <textarea name="content" class="form-control">{{ old('name') }}</textarea>
+                            <textarea name="content" class="form-control">{{ old('content') }}</textarea>
                         </div>
                         <div class="form-group col-md-12">
                             <label>Image</label>
                             <input type="file" name="image">
                         </div>
-                        <div class="form-group col-md-12">
+                        <div class="form-group col-md-6">
                             <label>Category</label>
                             {!! Form::select('category_id', $categories, null, ['class' => 'form-control', 'placeholder' => 'Pick a Category']) !!}
                         </div>
-                        <div class="form-group col-md-12">
+                        <div class="form-group col-md-6">
                             <label>Tags</label>
-                            {!! Form::select('tags', $tags, null, ['class' => 'form-control', 'placeholder' => 'Pick a Tag', 'multiple' => true]) !!}
+                            {!! Form::select('tags[]', $tags, null, ['class' => 'form-control', 'placeholder' => 'Pick a Tag', 'multiple' => true]) !!}
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label>Status</label>
+                            <input type="radio" value="PUBLISHED" name="status" checked> Published
+                            <input type="radio" value="DRAFT" name="status"> Draft
                         </div>
                         <div class="form-group col-md-12">
                             <div class="checkbox">
