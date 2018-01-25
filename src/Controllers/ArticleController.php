@@ -86,6 +86,8 @@ class ArticleController extends Controller
     public function edit($id)
     {
         $this->data['article'] = $this->respository->getArticle($id);
+        $this->data['categories'] = $this->categoryRespository->getCategoriesForSelect();
+        $this->data['tags'] = $this->tagRespository->getTagsForSelect();
 
         return view('artiman::article.edit', $this->data);
     }
@@ -103,7 +105,7 @@ class ArticleController extends Controller
             $this->respository->updateArticle($request, $id);
             return redirect('article')->with('message', 'Article Updated');
         } catch (\Exception $e) {
-            return back()->withErrors($e->getMessage());
+            return back()->withErrors($e->getMessage())->withInput();
         }
     }
 

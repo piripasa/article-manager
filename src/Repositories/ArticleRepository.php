@@ -47,7 +47,16 @@ class ArticleRepository
 
     public function updateArticle(Request $request, $id)
     {
-        return $this->model->whereId($id)->update($request->except(['_token', '_method']));
+        DB::transaction(function () use ($request, $id) {
+            $article = $this->model->find($id);
+            $article->update($request->except(['_token', '_method', 'tags']));
+            if ($request->tags) {
+                $tags = is_array($request->tags) ? $request->tags : [$request->tags];
+                $article->tags()->sync($tags);
+            }
+
+            return $article;
+        });
     }
 
     public function deleteArticle($id)

@@ -18,9 +18,9 @@
                         </ul>
                     </div>
                 @endif
-                {!! Form::open(['route' => ['article.store'], 'files' => true]) !!}
-                {{ csrf_field() }}
-                {{ method_field('POST') }}
+                {!! Form::open(['route' => ['article.update', $article->id], 'method' => 'PUT', 'files' => true]) !!}
+                {{ method_field('PUT') }}
+                <input type="hidden" name="id" value="{{ $article->id }}">
                 <div class="panel">
                     <div class="panel-heading">
                         <h3>Add a new  article</h3>
@@ -28,20 +28,20 @@
                     <div class="panel-body row">
                         <div class="form-group col-md-12">
                             <label>Name</label>
-                            <input type="text" name="title" value="{{ old('title') }}" class="form-control">
+                            <input type="text" name="title" value="{{ $article->title or old('title') }}" class="form-control">
                         </div>
                         <div class="form-group col-md-12">
                             <label>Slug (URL)</label>
-                            <input type="text" name="slug" value="{{ old('slug') }}" class="form-control">
+                            <input type="text" name="slug" value="{{ $article->slug or old('slug') }}" class="form-control">
                             <p class="help-block">Will be automatically generated from your name, if left empty.</p>
                         </div>
                         <div class="form-group col-md-2">
                             <label>Date</label>
-                            <input type="date" name="date" value="{{ old('date') }}" class="form-control">
+                            <input type="date" name="date" value="{{ $article->date or old('date') }}" class="form-control">
                         </div>
                         <div class="form-group col-md-12">
                             <label>Content</label>
-                            <textarea name="content" rows="6" class="form-control">{{ old('content') }}</textarea>
+                            <textarea name="content" rows="6" class="form-control">{{ $article->content or old('content') }}</textarea>
                         </div>
                         <div class="form-group col-md-12">
                             <label>Image</label>
@@ -49,7 +49,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label>Category</label>
-                            {!! Form::select('category_id', $categories, null, ['class' => 'form-control', 'placeholder' => 'Pick a Category', 'id' => 'category']) !!}
+                            {!! Form::select('category_id', $categories, $article->category_id, ['class' => 'form-control', 'placeholder' => 'Pick a Category', 'id' => 'category']) !!}
                         </div>
                         <div class="form-group col-md-6">
                             <label>Tags</label>
@@ -89,6 +89,7 @@
     <script>
         $(document).ready(function() {
             $('#category, #tags').select2();
+            $('#tags').val({!! json_encode($article->tags()->pluck('tag_id')->toArray()) !!}).trigger('change');
         });
     </script>
 
