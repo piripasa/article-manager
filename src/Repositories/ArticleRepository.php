@@ -33,7 +33,11 @@ class ArticleRepository
     public function createArticle(Request $request)
     {
         $article = $this->model->firstOrCreate($request->except(['_token', '_method', 'tags']));
-        $article->tags()->sync($request->tags);
+
+        if ($request->tags) {
+            $tags = is_array($request->tags) ? $request->tags : [$request->tags];
+            $article->tags()->sync($tags);
+        }
 
         return $article;
     }
