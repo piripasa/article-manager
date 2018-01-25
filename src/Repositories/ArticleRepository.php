@@ -9,6 +9,7 @@
 namespace Piripasa\ArticleManager\Repositories;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Piripasa\ArticleManager\Models\Article;
 
 class ArticleRepository
@@ -32,14 +33,16 @@ class ArticleRepository
 
     public function createArticle(Request $request)
     {
-        $article = $this->model->firstOrCreate($request->except(['_token', '_method', 'tags']));
+        DB::transaction(function () use ($request) {
+            $article = $this->model->firstOrCreate($request->except(['_token', '_method', 'tags']));
 
-        if ($request->tags) {
-            $tags = is_array($request->tags) ? $request->tags : [$request->tags];
-            $article->tags()->sync($tags);
-        }
+            if ($request->tags) {
+                $tags = is_array($request->tags) ? $request->tags : [$request->tags];
+                $article->tags()->sync($tags);
+            }
 
-        return $article;
+            return $article;
+        });
     }
 
     public function updateArticle(Request $request, $id)

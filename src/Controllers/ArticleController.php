@@ -62,7 +62,7 @@ class ArticleController extends Controller
             $this->respository->createArticle($request);
             return redirect('article')->with('message', 'Article Created');
         } catch (\Exception $e) {
-            return back()->withErrors($e->getMessage());
+            return back()->withErrors($e->getMessage())->withInput();
         }
     }
 

@@ -35,18 +35,13 @@
                             <input type="text" name="slug" value="{{ old('slug') }}" class="form-control">
                             <p class="help-block">Will be automatically generated from your name, if left empty.</p>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-2">
                             <label>Date</label>
-                            <div class="input-group date" data-provide="datepicker">
-                                <input type="text" name="date" value="{{ old('date') }}" class="form-control">
-                                <div class="input-group-addon">
-                                    <span class="glyphicon glyphicon-th"></span>
-                                </div>
-                            </div>
+                            <input type="date" name="date" value="{{ old('date') }}" class="form-control">
                         </div>
                         <div class="form-group col-md-12">
                             <label>Content</label>
-                            <textarea name="content" rows="5" class="form-control">{{ old('content') }}</textarea>
+                            <textarea name="content" rows="6" class="form-control">{{ old('content') }}</textarea>
                         </div>
                         <div class="form-group col-md-12">
                             <label>Image</label>
@@ -93,7 +88,6 @@
 
     <script>
         $(document).ready(function() {
-            $('.datepicker').datepicker();
             $('#category, #tags').select2();
         });
     </script>
