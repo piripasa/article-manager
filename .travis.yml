@@ -3,7 +3,7 @@ php:
   - 7.0
 git:
   lfs_skip_smudge: true
-  
+
 before_install:
   - composer self-update
   - composer create-project laravel/laravel
@@ -14,7 +14,7 @@ before_install:
   - cp ./vendor/piripasa/article-manager/tests/config/.env ./
   - rm ./config/app.php
   - cp ./vendor/piripasa/article-manager/tests/config/app.php ./config
-  - php artisan vendor:publish
+  - php artisan vendor:publish --provider="Piripasa\ArticleManager\ArticleManagerServiceProvider"
   - mysql -e "create database IF NOT EXISTS test;" -uroot
   - php artisan migrate
   - cd ./vendor/piripasa/article-manager
