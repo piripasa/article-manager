@@ -1,8 +1,9 @@
 language: php
 php:
-  - 5.5
-  - 5.6
   - 7.0
+git:
+  lfs_skip_smudge: true
+  
 before_install:
   - composer self-update
   - composer create-project laravel/laravel
@@ -19,3 +20,8 @@ before_install:
   - cd ./vendor/piripasa/article-manager
   
 script: "phpunit"
+
+matrix:
+  allow_failures:
+    - php: 7.0
+  fast_finish: true
